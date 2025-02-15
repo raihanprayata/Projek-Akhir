@@ -1,5 +1,9 @@
-import { data } from "./model.js";
+import ValidasiUser from "./model.js";
 
-const getData = (req, res) => {};
+const coba = (req, res) => {
+  res.json({
+    nama: "rehan",
+  });
+};
 
-export { getData };
+export { coba };
