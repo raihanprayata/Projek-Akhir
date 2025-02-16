@@ -1,5 +1,9 @@
+// import { DataTypes } from "sequelize";
+// import sequelize from "../../../utils/db_config.js";
+
 import { DataTypes } from "sequelize";
 import sequelize from "../../../utils/db_config.js";
+import ValidasiUser from "../valUsers/model.js"; // Import ValidasiUser
 
 const User = sequelize.define(
   "users",
@@ -13,6 +17,14 @@ const User = sequelize.define(
       type: DataTypes.STRING(20),
       allowNull: false,
       unique: true,
+      references: {
+        model: ValidasiUser, // Relasi ke validasi_user
+        key: "nim",
+      },
+    },
+    nama_lengkap: {
+      type: DataTypes.STRING(100),
+      allowNull: false,
     },
     password: {
       type: DataTypes.STRING(255),
@@ -20,11 +32,14 @@ const User = sequelize.define(
     },
     role: {
       type: DataTypes.ENUM("superadmin", "admin", "user"),
-      allowNull: false,
+      allowNull: false, // Role harus diisi saat login
     },
   },
-  { timestamps: false }
+  {
+    freezeTableName: true,
+    timestamps: false, // Tidak perlu createdAt dan updatedAt
+  }
 );
 
-sequelize.sync();
+sequelize.sync({ alter: true });
 export default User;

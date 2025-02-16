@@ -1,8 +1,11 @@
+// import { DataTypes } from "sequelize";
+// import sequelize from "../../../utils/db_config.js";
+
 import { DataTypes } from "sequelize";
 import sequelize from "../../../utils/db_config.js";
 
-const User = sequelize.define(
-  "users",
+const ValidasiUser = sequelize.define(
+  "validasi_user",
   {
     id: {
       type: DataTypes.INTEGER,
@@ -14,8 +17,12 @@ const User = sequelize.define(
       allowNull: false,
       unique: true,
     },
-    password: {
-      type: DataTypes.STRING(255),
+    nama_lengkap: {
+      type: DataTypes.STRING(100),
+      allowNull: false,
+    },
+    divisi: {
+      type: DataTypes.STRING(50),
       allowNull: false,
     },
     role: {
@@ -23,8 +30,11 @@ const User = sequelize.define(
       allowNull: false,
     },
   },
-  { timestamps: false }
+  {
+    freezeTableName: true,
+    timestamps: false, // Akan menambahkan kolom createdAt dan updatedAt secara otomatis
+  }
 );
 
 sequelize.sync();
-export default User;
+export default ValidasiUser;

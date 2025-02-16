@@ -2,7 +2,8 @@ import express from "express";
 import sequelize from "./app/utils/db_config.js";
 import session from "express-session";
 
-import authRoutes from "./app/api/v1/users/router.js";
+import modelValUser from "./app/api/v1/valUsers/router.js";
+import modelUser from "./app/api/v1/users/router.js";
 
 // import routerValidasiUsers from "./app/api/v1/valUsers/router.js";
 const app = express();
@@ -32,9 +33,11 @@ app.use(
 );
 // app.use(patternAPI, routerValidasiUsers);
 
-app.set("view engine", "ejs");
+app.set("view engine", "ejs"); // Menentukan engine tampilan
+app.set("views", "./views"); // Pastikan folder views benar
 
-app.use("/auth", authRoutes);
+app.use("/BEM_PeTIK", modelValUser);
+app.use("/BEM_PeTIK", modelUser);
 
 app.listen(3000, () => {
   console.log("Server is running...");

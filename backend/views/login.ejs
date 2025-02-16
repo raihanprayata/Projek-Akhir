@@ -19,53 +19,57 @@
     <div class="container m-5" style="width: 600px">
       <div class="card">
         <div class="card-body">
-          <form>
-            <div class="row m-2">
-              <div class="col">
-                <h1 class="d-flex justify-content-center mb-4 mt-5">Login</h1>
-                <div class="mb-3">
-                  <label class="form-label">Username</label>
-                  <input
-                    type="username"
-                    class="form-control"
-                    id="username"
-                    placeholder="masukkan username"
-                  />
-                </div>
-                <div class="mb-3">
-                  <label class="form-label">Password</label>
-                  <input
-                    type="password"
-                    class="form-control"
-                    id="password"
-                    placeholder="masukkan password"
-                  />
-                </div>
-                <div class="dropup">
-                  <label class="form-label">Pilih Divisi</label>
-                  <select class="form-select" data-bs-toggle="dropdown">
-                    <option selected>PIlih divisi</option>
-                    <option value="1">Menejemen/Pengasuhan</option>
-                    <option value="2">Ketua</option>
-                    <option value="3">Sekretaris</option>
-                    <option value="4">Bendahara</option>
-                    <option value="5">Divisi Ibadah</option>
-                    <option value="6">Divisi Kebersihan</option>
-                    <option value="7">Divisi Pendidikan</option>
-                    <option value="8">Divisi Dapur</option>
-                    <option value="9">Divisi Kesehatan</option>
-                    <option value="10">Lainnya</option>
-                  </select>
-                </div>
-                <div class="row">
-                  <div class="col d-grid m-3">
-                    <button type="submit" class="btn btn-success mt-3">
-                      Login
-                    </button>
-                  </div>
-                </div>
+          <form action="/BEM_PeTIK/login" method="POST">
+            <div class="mb-3">
+              <label class="form-label">NIM</label>
+              <input
+                type="text"
+                class="form-control"
+                name="nim"
+                placeholder="Masukkan NIM"
+                required
+              />
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                name="password"
+                placeholder="Masukkan Password"
+                required
+              />
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Pilih Divisi</label>
+              <select class="form-select" name="divisi" required>
+                <option value="">Pilih divisi</option>
+                <option value="manajemen">Manajemen/Pengasuhan</option>
+                <option value="ketua">Ketua</option>
+                <option value="sekretaris">Sekretaris</option>
+                <option value="bendahara">Bendahara</option>
+                <option value="ibadah">Divisi Ibadah</option>
+                <option value="kebersihan">Divisi Kebersihan</option>
+                <option value="pendidikan">Divisi Pendidikan</option>
+                <option value="dapur">Divisi Dapur</option>
+                <option value="kesehatan">Divisi Kesehatan</option>
+                <option value="lainnya">Lainnya</option>
+              </select>
+            </div>
+
+            <div class="row">
+              <div class="col d-grid m-3">
+                <button type="submit" class="btn btn-success mt-3">
+                  Login
+                </button>
               </div>
             </div>
+
+            <% if (typeof errorMessage !== "undefined" && errorMessage) { %>
+            <p class="text-danger"><%= errorMessage %></p>
+            <% } %>
           </form>
         </div>
       </div>
