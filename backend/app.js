@@ -4,7 +4,6 @@ import session from "express-session";
 
 import modelValUser from "./app/api/v1/valUsers/router.js";
 import modelUser from "./app/api/v1/users/router.js";
-
 // import routerValidasiUsers from "./app/api/v1/valUsers/router.js";
 const app = express();
 const patternAPI = "/API/v1";
@@ -27,18 +26,25 @@ app.use(express.urlencoded({ extended: true }));
 app.use(
   session({
     secret: "secret_key",
-    resave: false,
+    resave: false,  
     saveUninitialized: true,
-  })
+  }) 
 );
 // app.use(patternAPI, routerValidasiUsers);
 
-app.set("view engine", "ejs"); // Menentukan engine tampilan
-app.set("views", "./views"); // Pastikan folder views benar
+
+app.set("view engine", "ejs");
+app.set("views", "./views");
+// Middleware untuk menyajikan file statis
+// Pastikan folder views benar
 
 app.use("/BEM_PeTIK", modelValUser);
 app.use("/BEM_PeTIK", modelUser);
 
-app.listen(3000, () => {
+app.get("/beranda_user", (req,res) => {
+  res.render("beranda_user")
+})
+
+app.listen(4000, () => {
   console.log("Server is running...");
 });
